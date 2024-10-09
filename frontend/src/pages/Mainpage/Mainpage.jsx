@@ -1,11 +1,17 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Card from '../../components/Card/Card';
 import './Mainpage.css';
 import BottomNavbar from "../../components/BottomNavbar";
 import { ChevronRight } from 'lucide-react';
+import { useHistory } from 'react-router-dom';
+import List from '../List/List';
 
 
 const Mainpage = () => {
+    const history = useHistory();
+    const handleListClick = () => {
+        history.push('/List');
+    };
     const cardsData = [
         {
             title: 'Passionate about helping the need?',
@@ -99,7 +105,12 @@ const Mainpage = () => {
 
                 {/* Top Food Donors Section */}
                 <div className="section">
-                    <h2 className="section-title">Top Food Donors</h2>
+                    <div className="section-head">
+                        <h2 className="section-title">Top Food Donors</h2>
+                        <button className="section-btn" onClick={handleListClick}>
+                            <ChevronRight size={20} />
+                        </button>
+                    </div>
                     <p className="section-subtitle">Meet The Heroes Behind Our Mission</p>
                     <div className="donors-grid">
                         {donors.map((donor, index) => (

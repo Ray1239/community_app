@@ -1,0 +1,174 @@
+.leaderboard-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .leaderboard-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .leaderboard-title {
+    font-size: 2.5rem;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+    font-family: serif;
+  }
+  
+  .leaderboard-subtitle {
+    font-size: 1.1rem;
+    color: #718096;
+  }
+  
+  .back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: #4a5568;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .stats-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+  
+  .stat-card {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    margin: 0 0.5rem;
+  }
+  
+  .stat-icon {
+    color: #8ce991;
+    margin-bottom: 0.5rem;
+  }
+  
+  .stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2d3748;
+  }
+  
+  .stat-label {
+    font-size: 0.9rem;
+    color: #718096;
+  }
+  
+  .leaderboard-table {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .leaderboard-row {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    transition: background-color 0.3s ease;
+  }
+  
+  .leaderboard-row:last-child {
+    border-bottom: none;
+  }
+  
+  .leaderboard-row:hover {
+    background-color: #f7fafc;
+  }
+  
+  .top-1 {
+    background: linear-gradient(45deg, #fefcbf, #fff);
+  }
+  
+  .top-2 {
+    background: linear-gradient(45deg, #e2e8f0, #fff);
+  }
+  
+  .top-3 {
+    background: linear-gradient(45deg, #feebc8, #fff);
+  }
+  
+  .rank-cell {
+    display: flex;
+    align-items: center;
+    width: 60px;
+  }
+  
+  .rank-number {
+    font-weight: bold;
+    margin-left: 0.5rem;
+  }
+  
+  .donor-cell {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    margin-right: 1rem;
+  }
+  
+  .donor-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .donor-name {
+    font-weight: bold;
+    color: #2d3748;
+  }
+  
+  .donor-type {
+    font-size: 0.8rem;
+    color: #718096;
+  }
+  
+  .metrics-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 1rem;
+  }
+  
+  .metric {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #4a5568;
+    font-size: 0.9rem;
+  }
+  
+  .quality-score {
+    font-weight: bold;
+  }
+  
+  .last-donation {
+    font-size: 0.8rem;
+    color: #718096;
+    width: 80px;
+    text-align: right;
+  }

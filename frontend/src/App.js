@@ -12,6 +12,7 @@ import Profile from "./pages/Profile/Profile";
 import Signup from "./pages/Signup";
 import FirstPage from "./pages/FirstPage";
 import Mainpage from "./pages/Mainpage/Mainpage";
+import List from "./pages/List/List";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ConfirmFoodDetails from "./pages/ConfirmFoodDetails";
@@ -166,6 +167,9 @@ function App() {
               donationMeta={donationMeta}
               updateDonationMeta={updateDonationMeta}
             />
+          </Route>
+          <Route path="/List" exact>
+            <List />
           </Route>
         </Switch>
       </div>

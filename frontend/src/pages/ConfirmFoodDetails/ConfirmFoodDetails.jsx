@@ -1,17 +1,17 @@
 import styles from "./confirmFoodDetails.module.css";
 import BottomNavbar from "../../components/BottomNavbar";
 import DonateFoodNavbar from "../../components/DonateFoodNavbar";
-import { Link } from "react-router-dom";
-
 import { GoLocation } from "react-icons/go";
 import { BsTelephone } from "react-icons/bs";
-import { IoCalendarNumberOutline } from "react-icons/io5";
-import { GrAlarm } from "react-icons/gr";
-
 import Button from "../../components/Button";
 
-const ConfirmFoodDetails = (props) => {
-  const { foodData } = props;
+const ConfirmFoodDetails = ({ foodData, donationType, donationMeta, updateDonationMeta }) => {
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    updateDonationMeta({ [name]: value }); // Update donationMeta state
+  };
+
   return (
     <>
       <DonateFoodNavbar link="/foodDetails" />
@@ -37,6 +37,9 @@ const ConfirmFoodDetails = (props) => {
           <GoLocation />
           <input
             type="text"
+            name="location" // Name to match donationMeta
+            value={donationMeta.location} // Bind to state
+            onChange={handleInputChange} // Handle change
             placeholder="Sector 15, MIDC Road, Spine City, Pune"
           />
         </div>
@@ -44,16 +47,34 @@ const ConfirmFoodDetails = (props) => {
         <p className={styles.heading}>Contact Information</p>
         <div className={styles.input_box}>
           <BsTelephone />
-          <input type="number" placeholder="9876383735" />
+          <input
+            type="number"
+            name="contact" // Name to match donationMeta
+            value={donationMeta.contact} // Bind to state
+            onChange={handleInputChange} // Handle change
+            placeholder="9876383735"
+          />
         </div>
 
         <p className={styles.heading}>By when you can donate</p>
         <div className={styles.input_box}>
-          <input type="date" placeholder="30-Sep-2021" />
+          <input
+            type="date"
+            name="date" // Name to match donationMeta
+            value={donationMeta.date} // Bind to state
+            onChange={handleInputChange} // Handle change
+            placeholder="30-Sep-2021"
+          />
         </div>
 
         <div className={[styles.input_box, styles.bottom_input].join(" ")}>
-          <input type="time" placeholder="Time" />
+          <input
+            type="time"
+            name="time" // Name to match donationMeta
+            value={donationMeta.time} // Bind to state
+            onChange={handleInputChange} // Handle change
+            placeholder="Time"
+          />
         </div>
 
         <div className={styles.guideline}>

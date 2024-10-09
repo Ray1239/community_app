@@ -13,7 +13,7 @@ import Signup from "./pages/Signup";
 import FirstPage from "./pages/FirstPage";
 import Mainpage from "./pages/Mainpage/Mainpage";
 
-import { Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ConfirmFoodDetails from "./pages/ConfirmFoodDetails";
 import { useState, useEffect } from "react";
 
@@ -21,6 +21,13 @@ import axios from "axios";
 
 function App() {
   const [ngoData, setData] = useState(null);
+  const [donationType, setDonationType] = useState("");
+
+  const [foodData, setFoodData] = useState({ type: "", meal: "", quantity: 0 });
+  const [isLoad, setLoad] = useState(true);
+  const [userData, setUser] = useState({ isFetched: false, user: null });
+  const [donationMeta, setDonationMeta] = useState({ location: '', contact: '', date: '', time: '', delivery: false });
+
 
   const getNgoData = async () => {
     try {
@@ -33,7 +40,6 @@ function App() {
     }
   };
 
-  const [userData, setUser] = useState({ isFetched: false, user: null });
 
   const getUser = async () => {
     try {
@@ -54,15 +60,11 @@ function App() {
     getUser();
   }, []);
 
-  const [isLoad, setLoad] = useState(true);
-
   useEffect(() => {
     setInterval(() => {
       setLoad(false);
     }, 3000);
   }, []);
-
-  const [foodData, setFoodData] = useState({ type: "", meal: "", quantity: 0 });
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -73,6 +75,30 @@ function App() {
       };
     });
   };
+
+  const handleFoodType = (name, value) => {
+    setFoodData((prev) => ({
+        ...prev,
+        [name]: value,
+    }));
+  };
+
+  const updateDonationMeta = (metaData) => {
+    setDonationMeta((prevMeta) => ({
+      ...prevMeta,
+      ...metaData
+    }));
+  };
+
+  const handleFoodInput = (e) => {
+    const { name, value } = e.target;
+    setFoodData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleDonationTypeSelect = (type) => {
+    setDonationType(type);
+  };
+
 
   const logout = async () => {
     await axios.get(`${process.env.REACT_APP_BACKEND_URL}/logout`, {
@@ -90,53 +116,60 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Switch>
-        <Route exact path="/profile">
-          <Profile user={userData.user} logout={logout} />
-        </Route>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path="/profile">
+            <Profile user={userData.user} logout={logout} />
+          </Route>
 
-        <Route exact path="/">
-          {ngoData ? <HomePage data={ngoData} /> : null}
-        </Route>
+          <Route exact path="/">
+            {ngoData ? <HomePage data={ngoData} /> : null}
+          </Route>
 
-        <Route exact path="/Mainpage">
-          {ngoData ? <Mainpage /> : null}
-        </Route>
+          <Route exact path="/Mainpage">
+            {ngoData ? <Mainpage /> : null}
+          </Route>
 
-        <Route path="/category" exact>
-          <CategorySelection />
-        </Route>
+          <Route path="/category" exact>
+            <CategorySelection handleFoodType={handleFoodType}/>
+          </Route>
 
-        <Route path="/all" exact>
-          {ngoData ? <AllNGOS data={ngoData} /> : null}
-        </Route>
+          <Route path="/all" exact>
+            {ngoData ? <AllNGOS data={ngoData} /> : null}
+          </Route>
 
-        <Route path="/all/:id" exact>
-          {ngoData ? <NGOPage data={ngoData} /> : null}
-        </Route>
+          <Route path="/all/:id" exact>
+            {ngoData ? <NGOPage data={ngoData} /> : null}
+          </Route>
 
-        <Route path="/foodDetails" exact>
-          <FoodDetails handleInput={handleInput} />
-        </Route>
+          <Route path="/foodDetails" exact>
+            <FoodDetails handleInput={handleFoodInput} foodData={foodData} donationType={donationType}  />
+          </Route>
 
-        <Route path="/delivery" exact>
-          <DeliverSelection />
-        </Route>
+          <Route path="/delivery" exact>
+            <DeliverSelection foodMeta={donationMeta} updateDonationMeta={updateDonationMeta} foodData={foodData}/>
+          </Route>
 
-        <Route path="/chooseRole" exact>
-          <ChooseRole />
-        </Route>
+          <Route path="/chooseRole" exact>
+            <ChooseRole />
+          </Route>
 
-        <Route path="/donationType" exact>
-          <DonationSelection />
-        </Route>
+          <Route path="/donationType" exact>
+            <DonationSelection onSelect={handleDonationTypeSelect}/>
+          </Route>
 
-        <Route path="/confirmFoodDetails" exact>
-          <ConfirmFoodDetails foodData={foodData} />
-        </Route>
-      </Switch>
-    </div>
+          <Route path="/confirmFoodDetails" exact>
+            <ConfirmFoodDetails
+              foodData={foodData}
+              donationType={donationType}
+              donationMeta={donationMeta}
+              updateDonationMeta={updateDonationMeta}
+            />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

@@ -3,7 +3,7 @@ import styles from "./categorySelection.module.css";
 import DonateFoodNavbar from "../../components/DonateFoodNavbar";
 import { Link } from "react-router-dom";
 
-const CategorySelection = () => {
+const CategorySelection = ({donationType, handleFoodType}) => {
   return (
     <>
       <DonateFoodNavbar link="/donationType"/>
@@ -13,13 +13,13 @@ const CategorySelection = () => {
         <h1>Select the Category</h1>
         <div className={styles.image_section}>
           <Link to="/foodDetails">
-            <img src="./images/cooked-food.png" alt="Cooked-Food" />
+            <img src="./images/cooked-food.png" alt="Cooked-Food" onClick={() => handleFoodType('type', 'Cooked-Food')}/>
           </Link>
           <Link to="/foodDetails">
-            <img src="./images/raw-food.png" alt="Raw-Food" />
+            <img src="./images/raw-food.png" alt="Raw-Food" onClick={() => handleFoodType('type', 'Raw-Food')}/>
           </Link>
           <Link to="/foodDetails">
-            <img src="./images/packed-food.png" alt="Packed-Food" />
+            <img src="./images/packed-food.png" alt="Packed-Food" onClick={() => handleFoodType('type', 'Packed-Food')}/>
           </Link>
         </div>
       </div>

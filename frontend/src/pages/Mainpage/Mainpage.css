@@ -1,0 +1,266 @@
+.page-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+/* Header Styles */
+.main-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.main-head {
+    font-family: 'Dancing Script', cursive; 
+    font-size: 42px;
+    margin-bottom: 8px;
+}
+
+.p-opensans {
+    font-size: 24px;
+    font-family: 'Dancing Script', cursive;     
+    margin: 4px 0;
+    color:#4af252;
+}
+
+/* Card Container */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.card-container > *:last-child {
+    grid-column: 1 / -1;
+}
+
+/* Section Styles */
+.section {
+    margin-bottom: 30px;
+}
+
+.section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background-color: #ffffff;
+  }
+  
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333333;
+    margin: 0;
+  }
+  
+  .section-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666666;
+    transition: color 0.3s ease;
+  }
+  
+  .section-btn:hover {
+    color: #333333;
+  }
+
+.section-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 16px;
+}
+
+/* Donation List Styles */
+.donation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.donation-item {
+    display: flex;
+    gap: 12px;
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.donation-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.donation-details {
+    flex: 1;
+}
+
+.donation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.donation-header h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.view-details {
+    color: #007bff;
+    border: none;
+    background: none;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.description {
+    font-size: 14px;
+    color: #666;
+    margin: 4px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.weight {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.time-ago {
+    color: #999;
+    font-size: 12px;
+}
+
+/* Donors Grid */
+.donors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 16px;
+}
+
+.donor-item img {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 8px;
+}
+
+.donor-item p {
+    font-size: 12px;
+    text-align: center;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 480px) {
+    .card-container {
+        grid-template-columns: 1fr;
+    }
+
+    .card-container > *:last-child {
+        grid-column: auto;
+    }
+
+    .main-head {
+        font-size: 28px;
+    }
+
+    .p-opensans {
+        font-size: 14px;
+    }
+}
+
+/* differnce section */
+
+.dashboard-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.dashboard-container h2 {
+    text-align: center;
+    color: #333;
+}
+
+.stats-cards {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.stats-card {
+    background-color: #eafbea;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    flex: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card p {
+    margin: 8px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.stats-card h3 {
+    font-size: 36px;
+    color: #333;
+    margin: 8px 0;
+}
+
+.points-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #8bdc8b;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.points-button:hover {
+    background-color: #7acb7a;
+}
+
+.mission-statement {
+    background-color: #eafbea;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.mission-statement h4 {
+    margin-bottom: 12px;
+    color: #333;
+    font-size: 18px;
+}
+
+.mission-statement p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}

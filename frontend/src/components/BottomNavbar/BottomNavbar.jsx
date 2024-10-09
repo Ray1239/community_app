@@ -2,6 +2,7 @@ import { CgProfile } from "react-icons/cg";
 import { BiHomeAlt, BiDonateHeart } from "react-icons/bi";
 import { GrLocation } from "react-icons/gr";
 import { RiTimeLine } from "react-icons/ri";
+import Mainpage from "../../pages/Mainpage/Mainpage";
 
 import styles from "./bottomNavbar.module.css";
 import { Link } from "react-router-dom";
@@ -9,7 +10,7 @@ import { Link } from "react-router-dom";
 const BottomNavbar = () => {
   return (
     <div className={styles.navbar}>
-      <Link to="/">
+      <Link to="/Mainpage">
         <div className={styles.link}>
           <BiHomeAlt className={styles.icon} />
           <p className={styles.link_text}>Home</p>

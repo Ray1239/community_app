@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 
 const Signup = () => {
   const login = () => {
-    window.location.href = `${process.env.REACT_APP_BACKEND_URL}/auth/google`;
+    window.location.href = `${process.env.REACT_APP_BACKEND_URL ?? "http://localhost:3000"}/auth/google`;
   };
 
   return (

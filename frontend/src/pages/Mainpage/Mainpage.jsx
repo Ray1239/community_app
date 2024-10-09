@@ -1,11 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import './Mainpage.css';
 import BottomNavbar from "../../components/BottomNavbar";
 import { ChevronRight } from 'lucide-react';
-
+import axios from "axios";
 
 const Mainpage = () => {
+    const [donation, setDonation] = useState({ isFetched: false, donations: [], totalPoints: 0 });
+
+    useEffect(() => {
+        const getDonations = async () => {
+            try {
+                const { data } = await axios.get(
+                    `${process.env.REACT_APP_BACKEND_URL}/foodDonation`,
+                    {
+                        withCredentials: true,
+                    }
+                );
+
+                const points = await axios.get(
+                    `${process.env.REACT_APP_BACKEND_URL}/user/points`,
+                    {
+                        withCredentials: true,
+                    }
+                )
+                setDonation({ isFetched: true, donations: data, totalPoints: points.data.totalPoints });
+                console.log(donation);
+            } catch (err) {
+                console.error(err);
+                setDonation({ isFetched: false, donations: [], totalPoints: 0 });
+            }
+        };
+
+        getDonations();
+    }, []);
+
+    
+
     const cardsData = [
         {
             title: 'Passionate about helping the need?',
@@ -117,12 +148,12 @@ const Mainpage = () => {
                     <div className="stats-cards">
                         <div className="stats-card">
                             <p>Total Donation</p>
-                            <h3>12</h3>
+                            <h3>{donation.donations.length}</h3>
                             <p>Donation</p>
                         </div>
                         <div className="stats-card">
                             <p>Woohoo! You have earned</p>
-                            <h3>324</h3>
+                            <h3>{donation.totalPoints}</h3>
                             <p>points earned</p>
                         </div>
                     </div>

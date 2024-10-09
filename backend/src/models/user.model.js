@@ -5,7 +5,8 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required: false},
     name: {type: String, required: true},
     profilePic: {type: String, required: false},
-    donations: [{type: mongoose.Schema.Types.ObjectId, ref: "ngos", required: false}]
+    donations: [{type: mongoose.Schema.Types.ObjectId, ref: "ngos", required: false}],
+    totalPoints: { type: Number, default: 0 }
 }, {
     versionKey: false,
     timestamps: true

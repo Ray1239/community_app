@@ -25,7 +25,6 @@ const Mainpage = () => {
                     }
                 )
                 setDonation({ isFetched: true, donations: data, totalPoints: points.data.totalPoints });
-                console.log(donation);
             } catch (err) {
                 console.error(err);
                 setDonation({ isFetched: false, donations: [], totalPoints: 0 });
@@ -35,7 +34,14 @@ const Mainpage = () => {
         getDonations();
     }, []);
 
-    
+    const mealImages = {
+        Breakfast: '/images/breakfast.jpg',
+        Lunch: '/images/lunch.jpg',
+        Dinner: '/images/dinner.jpg',
+    };
+
+    const recentDonations = donation.donations.slice(-2).reverse();
+    console.log(donation)
 
     const cardsData = [
         {
@@ -104,7 +110,7 @@ const Mainpage = () => {
                 </div>
 
                 {/* Previous Donations Section */}
-                <div className="section">
+                {/* <div className="section">
                     <div className="section-head">
                         <h2 className="section-title">Previous Donation</h2>
                         <button className="section-btn">
@@ -122,6 +128,28 @@ const Mainpage = () => {
                                     </div>
                                     <p>{item.details} {item.quantity} ...read more</p>
                                     <p className="time-ago">{item.timeAgo}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div> */}
+                <div className="section">
+                    <div className="section-head">
+                        <h2 className="section-title">Previous Donations</h2>
+                        <button className="section-btn">
+                            <ChevronRight size={20} />
+                        </button>
+                    </div>
+                    <div className="donation-list">
+                        {recentDonations.map((item, index) => (
+                            <div key={index} className="donation-item">
+                                <img src={mealImages[item.foodDetails.meal] || '/images/dinner.jpg'} alt={item.foodDetails.meal} />
+                                <div className="donation-details">
+                                    <div className="donation-header">
+                                        <h4>{item.foodDetails.type} {item.foodDetails.meal}</h4>
+                                    </div>
+                                    <p>{`Prepared for ${item.foodDetails.quantity} people`}</p>
+                                    <p className="time-ago">{new Date(item.createdAt).toLocaleDateString()}</p>
                                 </div>
                             </div>
                         ))}

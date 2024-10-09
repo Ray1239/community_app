@@ -92,7 +92,6 @@ app.use("/ngos", ngoController);
 
 app.use("/foodDonation", isAutheticated, donationController);
 
-
 app.get("/logout", (req, res) => {
   req.logout();
   res.send("logout");

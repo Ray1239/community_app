@@ -1,13 +1,50 @@
-import React,{useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import './Mainpage.css';
 import BottomNavbar from "../../components/BottomNavbar";
 import { ChevronRight } from 'lucide-react';
-import { useHistory } from 'react-router-dom';
+import axios from "axios";import { useHistory } from 'react-router-dom';
 import List from '../List/List';
 
 
 const Mainpage = () => {
+    const [donation, setDonation] = useState({ isFetched: false, donations: [], totalPoints: 0 });
+
+    useEffect(() => {
+        const getDonations = async () => {
+            try {
+                const { data } = await axios.get(
+                    `${process.env.REACT_APP_BACKEND_URL}/foodDonation`,
+                    {
+                        withCredentials: true,
+                    }
+                );
+
+                const points = await axios.get(
+                    `${process.env.REACT_APP_BACKEND_URL}/user/points`,
+                    {
+                        withCredentials: true,
+                    }
+                )
+                setDonation({ isFetched: true, donations: data, totalPoints: points.data.totalPoints });
+            } catch (err) {
+                console.error(err);
+                setDonation({ isFetched: false, donations: [], totalPoints: 0 });
+            }
+        };
+
+        getDonations();
+    }, []);
+
+    const mealImages = {
+        Breakfast: '/images/breakfast.jpg',
+        Lunch: '/images/lunch.jpg',
+        Dinner: '/images/dinner.jpg',
+    };
+
+    const recentDonations = donation.donations.slice(-2).reverse();
+    console.log(donation)
+
     const history = useHistory();
     const handleListClick = () => {
         history.push('/List');
@@ -50,10 +87,10 @@ const Mainpage = () => {
         }
     ];
     const donors = [
-        { name: "Lavender Park Restaurant", image: "/images/man1.png" },
+        { name: "John", image: "/images/man1.png" },
         { name: "Mr. Sandeep", image: "/images/man2.png" },
-        { name: "Chaiwala", image: "/images/women3.png" },
-        { name: "SM Foods", image: "/images/women4.png" }
+        { name: "Melissa", image: "/images/women3.png" },
+        { name: "Hermoine", image: "/images/women4.png" }
     ];
 
     return (
@@ -79,7 +116,7 @@ const Mainpage = () => {
                 </div>
 
                 {/* Previous Donations Section */}
-                <div className="section">
+                {/* <div className="section">
                     <div className="section-head">
                         <h2 className="section-title">Previous Donation</h2>
                         <button className="section-btn">
@@ -97,6 +134,28 @@ const Mainpage = () => {
                                     </div>
                                     <p>{item.details} {item.quantity} ...read more</p>
                                     <p className="time-ago">{item.timeAgo}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div> */}
+                <div className="section">
+                    <div className="section-head">
+                        <h2 className="section-title">Previous Donations</h2>
+                        <button className="section-btn">
+                            <ChevronRight size={20} />
+                        </button>
+                    </div>
+                    <div className="donation-list">
+                        {recentDonations.map((item, index) => (
+                            <div key={index} className="donation-item">
+                                <img src={mealImages[item.foodDetails.meal] || '/images/dinner.jpg'} alt={item.foodDetails.meal} />
+                                <div className="donation-details">
+                                    <div className="donation-header">
+                                        <h4>{item.foodDetails.type} {item.foodDetails.meal}</h4>
+                                    </div>
+                                    <p>{`Prepared for ${item.foodDetails.quantity} people`}</p>
+                                    <p className="time-ago">{new Date(item.createdAt).toLocaleDateString()}</p>
                                 </div>
                             </div>
                         ))}
@@ -128,12 +187,12 @@ const Mainpage = () => {
                     <div className="stats-cards">
                         <div className="stats-card">
                             <p>Total Donation</p>
-                            <h3>12</h3>
+                            <h3>{donation.donations.length}</h3>
                             <p>Donation</p>
                         </div>
                         <div className="stats-card">
                             <p>Woohoo! You have earned</p>
-                            <h3>324</h3>
+                            <h3>{donation.totalPoints}</h3>
                             <p>points earned</p>
                         </div>
                     </div>

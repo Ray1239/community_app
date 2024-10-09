@@ -6,9 +6,9 @@ import DonateFoodNavbar from "../../components/DonateFoodNavbar";
 import Button from "../../components/Button";
 import { useState } from "react";
 
-const FoodDetails = ({handleInput, foodData, donationType, foodType}) => {
+const FoodDetails = ({handleInput, foodData, donationType}) => {
   console.log(donationType);
-  console.log(foodType)
+  console.log(foodData);
   const [quanity, setQuantity] = useState(0);
   const [time, setTime] = useState(0);
 

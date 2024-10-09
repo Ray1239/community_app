@@ -12,7 +12,7 @@ import Profile from "./pages/Profile/Profile";
 import Signup from "./pages/Signup";
 import FirstPage from "./pages/FirstPage";
 
-import { Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ConfirmFoodDetails from "./pages/ConfirmFoodDetails";
 import { useState, useEffect } from "react";
 
@@ -21,12 +21,11 @@ import axios from "axios";
 function App() {
   const [ngoData, setData] = useState(null);
   const [donationType, setDonationType] = useState("");
-  const [foodType, setFoodType] = useState("");
+
   const [foodData, setFoodData] = useState({ type: "", meal: "", quantity: 0 });
   const [isLoad, setLoad] = useState(true);
   const [userData, setUser] = useState({ isFetched: false, user: null });
-  const [mealType, setMealType] = useState('');
-
+  const [donationMeta, setDonationMeta] = useState({ location: '', contact: '', date: '', time: '', delivery: false });
 
   const getNgoData = async () => {
     try {
@@ -78,6 +77,13 @@ function App() {
     });
   };
 
+  const handleFoodType = (name, value) => {
+    setFoodData((prev) => ({
+        ...prev,
+        [name]: value,
+    }));
+  };
+
   const logout = async () => {
     await axios.get(`${process.env.REACT_APP_BACKEND_URL}/logout`, {
       withCredentials: true,
@@ -94,13 +100,12 @@ function App() {
     setDonationType(type);
   };
 
-  const handleFoodType = (type) => {
-    setFoodType(type);
-  }
-
-  const handleMealType = (type) => {
-    setMealType(type);
-  }
+  const updateDonationMeta = (metaData) => {
+    setDonationMeta((prevMeta) => ({
+      ...prevMeta,
+      ...metaData
+    }));
+  };
 
 
   if (!userData.isFetched) {
@@ -112,49 +117,56 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Switch>
-        <Route exact path="/profile">
-          <Profile user={userData.user} logout={logout} />
-        </Route>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route exact path="/profile">
+            <Profile user={userData.user} logout={logout} />
+          </Route>
 
-        <Route exact path="/">
-          {ngoData ? <HomePage data={ngoData} /> : null}
-        </Route>
+          <Route exact path="/">
+            {ngoData ? <HomePage data={ngoData} /> : null}
+          </Route>
 
-        <Route path="/category" exact>
-          <CategorySelection donationType={donationType} handleFoodType={handleFoodType}/>
-        </Route>
+          <Route path="/category" exact>
+            <CategorySelection donationType={donationType} handleFoodType={handleFoodType}/>
+          </Route>
 
-        <Route path="/all" exact>
-          {ngoData ? <AllNGOS data={ngoData} /> : null}
-        </Route>
+          <Route path="/all" exact>
+            {ngoData ? <AllNGOS data={ngoData} /> : null}
+          </Route>
 
-        <Route path="/all/:id" exact>
-          {ngoData ? <NGOPage data={ngoData} /> : null}
-        </Route>
+          <Route path="/all/:id" exact>
+            {ngoData ? <NGOPage data={ngoData} /> : null}
+          </Route>
 
-        <Route path="/foodDetails" exact>
-          <FoodDetails handleInput={handleFoodInput} foodData={foodData} donationType={donationType} foodType={foodType}  />
-        </Route>
+          <Route path="/foodDetails" exact>
+            <FoodDetails handleInput={handleFoodInput} foodData={foodData} donationType={donationType}  />
+          </Route>
 
-        <Route path="/delivery" exact>
-          <DeliverSelection />
-        </Route>
+          <Route path="/delivery" exact>
+            <DeliverSelection foodMeta={donationMeta} updateDonationMeta={updateDonationMeta} foodData={foodData}/>
+          </Route>
 
-        <Route path="/chooseRole" exact>
-          <ChooseRole />
-        </Route>
+          <Route path="/chooseRole" exact>
+            <ChooseRole />
+          </Route>
 
-        <Route path="/donationType" exact>
-          <DonationSelection onSelect={handleDonationTypeSelect}/>
-        </Route>
+          <Route path="/donationType" exact>
+            <DonationSelection onSelect={handleDonationTypeSelect}/>
+          </Route>
 
-        <Route path="/confirmFoodDetails" exact>
-          <ConfirmFoodDetails foodData={foodData} donationType={donationType} />
-        </Route>
-      </Switch>
-    </div>
+          <Route path="/confirmFoodDetails" exact>
+            <ConfirmFoodDetails
+              foodData={foodData}
+              donationType={donationType}
+              donationMeta={donationMeta}
+              updateDonationMeta={updateDonationMeta}
+            />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

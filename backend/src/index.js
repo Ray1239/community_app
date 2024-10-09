@@ -41,6 +41,7 @@ app.use(cors({ origin: process.env.ORIGIN, credentials: true }));
 
 const User = require("./models/user.model");
 const userController = require("./controllers/user.controller");
+const donationController = require("./controllers/donation.controller");
 const ngoController = require("./controllers/ngo.controller");
 
 const passport = require("./configs/passport");
@@ -88,6 +89,9 @@ app.get("/test", isAutheticated, (req, res) => {
 app.use("/user", isAutheticated, userController);
 
 app.use("/ngos", ngoController);
+
+app.use("/foodDonation", isAutheticated, donationController);
+
 
 app.get("/logout", (req, res) => {
   req.logout();

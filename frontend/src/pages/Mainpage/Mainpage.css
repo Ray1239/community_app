@@ -76,6 +76,7 @@
     font-size: 14px;
     color: #666;
     margin-bottom: 16px;
+    padding-left: 16px;
 }
 
 /* Donation List Styles */
@@ -117,6 +118,17 @@
     font-size: 16px;
     font-weight: bold;
     color: #333;
+}
+.section-btn{
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    color: #666666;
+    transition: color 0.3s ease;
 }
 
 .view-details {

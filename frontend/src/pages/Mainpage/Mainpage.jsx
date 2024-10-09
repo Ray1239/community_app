@@ -3,7 +3,9 @@ import Card from '../../components/Card/Card';
 import './Mainpage.css';
 import BottomNavbar from "../../components/BottomNavbar";
 import { ChevronRight } from 'lucide-react';
-import axios from "axios";
+import axios from "axios";import { useHistory } from 'react-router-dom';
+import List from '../List/List';
+
 
 const Mainpage = () => {
     const [donation, setDonation] = useState({ isFetched: false, donations: [], totalPoints: 0 });
@@ -43,6 +45,10 @@ const Mainpage = () => {
     const recentDonations = donation.donations.slice(-2).reverse();
     console.log(donation)
 
+    const history = useHistory();
+    const handleListClick = () => {
+        history.push('/List');
+    };
     const cardsData = [
         {
             title: 'Passionate about helping the need?',
@@ -81,10 +87,10 @@ const Mainpage = () => {
         }
     ];
     const donors = [
-        { name: "Lavender Park Restaurant", image: "/images/man1.png" },
+        { name: "John", image: "/images/man1.png" },
         { name: "Mr. Sandeep", image: "/images/man2.png" },
-        { name: "Chaiwala", image: "/images/women3.png" },
-        { name: "SM Foods", image: "/images/women4.png" }
+        { name: "Melissa", image: "/images/women3.png" },
+        { name: "Hermoine", image: "/images/women4.png" }
     ];
 
     // console.log(mealImages[recentDonations[2].foodDetails.meal])
@@ -160,7 +166,12 @@ const Mainpage = () => {
 
                 {/* Top Food Donors Section */}
                 <div className="section">
-                    <h2 className="section-title">Top Food Donors</h2>
+                    <div className="section-head">
+                        <h2 className="section-title">Top Food Donors</h2>
+                        <button className="section-btn" onClick={handleListClick}>
+                            <ChevronRight size={20} />
+                        </button>
+                    </div>
                     <p className="section-subtitle">Meet The Heroes Behind Our Mission</p>
                     <div className="donors-grid">
                         {donors.map((donor, index) => (

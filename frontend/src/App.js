@@ -20,6 +20,13 @@ import axios from "axios";
 
 function App() {
   const [ngoData, setData] = useState(null);
+  const [donationType, setDonationType] = useState("");
+  const [foodType, setFoodType] = useState("");
+  const [foodData, setFoodData] = useState({ type: "", meal: "", quantity: 0 });
+  const [isLoad, setLoad] = useState(true);
+  const [userData, setUser] = useState({ isFetched: false, user: null });
+  const [mealType, setMealType] = useState('');
+
 
   const getNgoData = async () => {
     try {
@@ -32,7 +39,6 @@ function App() {
     }
   };
 
-  const [userData, setUser] = useState({ isFetched: false, user: null });
 
   const getUser = async () => {
     try {
@@ -53,7 +59,6 @@ function App() {
     getUser();
   }, []);
 
-  const [isLoad, setLoad] = useState(true);
 
   useEffect(() => {
     setInterval(() => {
@@ -61,7 +66,7 @@ function App() {
     }, 3000);
   }, []);
 
-  const [foodData, setFoodData] = useState({ type: "", meal: "", quantity: 0 });
+  
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -79,6 +84,24 @@ function App() {
     });
     setUser({ user: null, isFetched: true });
   };
+
+  const handleFoodInput = (e) => {
+    const { name, value } = e.target;
+    setFoodData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleDonationTypeSelect = (type) => {
+    setDonationType(type);
+  };
+
+  const handleFoodType = (type) => {
+    setFoodType(type);
+  }
+
+  const handleMealType = (type) => {
+    setMealType(type);
+  }
+
 
   if (!userData.isFetched) {
     return <p>Loading...</p>;
@@ -100,7 +123,7 @@ function App() {
         </Route>
 
         <Route path="/category" exact>
-          <CategorySelection />
+          <CategorySelection donationType={donationType} handleFoodType={handleFoodType}/>
         </Route>
 
         <Route path="/all" exact>
@@ -112,7 +135,7 @@ function App() {
         </Route>
 
         <Route path="/foodDetails" exact>
-          <FoodDetails handleInput={handleInput} />
+          <FoodDetails handleInput={handleFoodInput} foodData={foodData} donationType={donationType} foodType={foodType}  />
         </Route>
 
         <Route path="/delivery" exact>
@@ -124,11 +147,11 @@ function App() {
         </Route>
 
         <Route path="/donationType" exact>
-          <DonationSelection />
+          <DonationSelection onSelect={handleDonationTypeSelect}/>
         </Route>
 
         <Route path="/confirmFoodDetails" exact>
-          <ConfirmFoodDetails foodData={foodData} />
+          <ConfirmFoodDetails foodData={foodData} donationType={donationType} />
         </Route>
       </Switch>
     </div>

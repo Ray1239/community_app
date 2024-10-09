@@ -8,10 +8,13 @@ import { BsTelephone } from "react-icons/bs";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { GrAlarm } from "react-icons/gr";
 
+
+
 import Button from "../../components/Button";
 
-const ConfirmFoodDetails = (props) => {
-  const { foodData } = props;
+const ConfirmFoodDetails = ({foodData, donationType}) => {
+  // const { foodData } = props.foodData;
+  // const {donationType} = props.donationType;
   return (
     <>
       <DonateFoodNavbar link="/foodDetails" />

@@ -1,0 +1,123 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures padding and borders are included in total width and height */
+  font-family:'Times New Roman', Times, serif; /* Sets a default font */
+  background: transparent; /* Ensures all backgrounds are transparent by default */
+}
+
+.main{
+display: flex;
+padding: 0px 20px;
+}
+.left{
+  height: 100%;
+  width: 60%;
+  padding-top: 22%;
+
+}
+.left>h1{
+  font-size: 20px;
+  padding-top: 10px;
+}
+.left>p{
+  margin-top: 20px;
+  height: 10px;
+}
+.right{
+  height: 100%;
+  width: 40%;
+padding-top: 22%;
+
+}
+.right>h1{
+  font-size: 20px;
+  padding: 5px;
+  display: flex;
+}
+.right>p{
+  text-decoration: underline;
+  padding-left: 10px;
+}
+hr{
+  border: none; /* Remove default border */
+  height: 2px; /* Set the height of the line */
+  background-color: #000; /* Set the color */
+  margin-top: 30px; /* Adjust margins as needed */
+}
+
+.main2{
+  display: flex;
+  padding-top: 2%;
+  
+  }
+  .r-1{
+    height: 20%;
+    width: 20%;
+  }
+.rem{
+  height: 30px;
+  width: 30px;
+  border: solid #097b30;
+  margin: 15px 15px;
+  border-radius: 10px;
+}
+.rem2{
+  height: 15px;
+  width: 15px;
+  border: 097b30;
+  background-color: #097b30;
+  margin: 4px 5px;
+  border-radius: 2px;
+  position: absolute;
+
+}
+
+.l-1{
+  height: 20%;
+  width: 20%;
+  position: absolute;
+}
+
+.text1{
+  margin: 23px 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.main3{
+  display: flex;
+  padding: 2% 0%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.btn1{
+  height: 42px; 
+  /* width: 199%; */
+  width: 7rem;
+  font-size: 18px;
+  font-weight: 600;
+  border: solid black;
+  border-radius: 8px;
+}
+.btn2{
+  height: 42px;
+  /* width: 199%; */
+  width: 7rem;
+  font-size: 18px;
+  font-weight: 600;
+  border: solid #097b30; 
+  background-color: #097b30;
+  color: white;
+  border-radius: 8px;
+
+}
+.hr3{
+  
+  border: none; /* Remove default border */
+  height: 6px; /* Set the height of the line */
+  background-color: grey; /* Set the color */
+  margin-top: 30px; /* Adjust margins as needed */
+  
+}

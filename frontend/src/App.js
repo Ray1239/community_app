@@ -13,6 +13,8 @@ import Signup from "./pages/Signup";
 import FirstPage from "./pages/FirstPage";
 import Mainpage from "./pages/Mainpage/Mainpage";
 import List from "./pages/List/List";
+import DelieveryPartner from "./pages/DelieveryPartner";
+import DelieveryPartner2 from "./pages/DelieveryPartner2"
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ConfirmFoodDetails from "./pages/ConfirmFoodDetails";
@@ -171,6 +173,12 @@ function App() {
           <Route path="/List" exact>
             <List />
           </Route>
+          <Route path="/delievery" exact>
+            <DelieveryPartner />
+          </Route>
+          <Route path="/delievery2" exact>
+            <DelieveryPartner2 />
+          </Route>
         </Switch>
       </div>
     </Router>

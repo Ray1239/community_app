@@ -16,11 +16,16 @@ import List from "./pages/List/List";
 import DelieveryPartner from "./pages/DelieveryPartner";
 import DelieveryPartner2 from "./pages/DelieveryPartner2"
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, useParams } from "react-router-dom";
 import ConfirmFoodDetails from "./pages/ConfirmFoodDetails";
 import { useState, useEffect } from "react";
 
 import axios from "axios";
+
+const CategorySelectionWrapper = ({ handleFoodType, updateDonationMeta }) => {
+  const { id } = useParams();
+  return <CategorySelection handleFoodType={handleFoodType} updateDonationMeta={updateDonationMeta} selectedId={id} />;
+};
 
 function App() {
   const [ngoData, setData] = useState(null);
@@ -29,7 +34,7 @@ function App() {
   const [foodData, setFoodData] = useState({ type: "", meal: "", quantity: 0 });
   const [isLoad, setLoad] = useState(true);
   const [userData, setUser] = useState({ isFetched: false, user: null });
-  const [donationMeta, setDonationMeta] = useState({ location: '', contact: '', date: '', time: '', delivery: false });
+  const [donationMeta, setDonationMeta] = useState({ location: '', contact: '', date: '', time: '', delivery: false, ngo: null });
 
 
   const getNgoData = async () => {
@@ -87,11 +92,13 @@ function App() {
   };
 
   const updateDonationMeta = (metaData) => {
-    setDonationMeta((prevMeta) => ({
-      ...prevMeta,
-      ...metaData
-    }));
+    setDonationMeta((prevMeta) => {
+      const newMeta = { ...prevMeta, ...metaData };
+      console.log("Updated Donation Meta:", newMeta); // Log the updated state
+      return newMeta;
+    });
   };
+  
 
   const handleFoodInput = (e) => {
     const { name, value } = e.target;
@@ -127,7 +134,7 @@ function App() {
           </Route>
 
           <Route exact path="/">
-            {ngoData ? <HomePage data={ngoData} /> : null}
+            {ngoData ? <HomePage data={ngoData}/> : null}
           </Route>
 
           <Route exact path="/Mainpage">
@@ -135,7 +142,11 @@ function App() {
           </Route>
 
           <Route path="/category" exact>
-            <CategorySelection handleFoodType={handleFoodType}/>
+            <CategorySelection handleFoodType={handleFoodType} updateDonationMeta={updateDonationMeta}/>
+          </Route>
+
+          <Route path="/category/:id" exact>
+            <CategorySelectionWrapper handleFoodType={handleFoodType} updateDonationMeta={updateDonationMeta} />
           </Route>
 
           <Route path="/all" exact>
@@ -143,7 +154,7 @@ function App() {
           </Route>
 
           <Route path="/all/:id" exact>
-            {ngoData ? <NGOPage data={ngoData} /> : null}
+            {ngoData ? <NGOPage data={ngoData}/> : null}
           </Route>
 
           <Route path="/foodDetails" exact>

@@ -93,6 +93,8 @@ const Mainpage = () => {
         { name: "Hermoine", image: "/images/women4.png" }
     ];
 
+    // console.log(mealImages[recentDonations[2].foodDetails.meal])
+
     return (
         <>
             <BottomNavbar />

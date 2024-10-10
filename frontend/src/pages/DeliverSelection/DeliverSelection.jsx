@@ -26,6 +26,7 @@ const DeliverSelection = ({ foodMeta, updateDonationMeta, foodData }) => {
             contact: foodMeta.contact,
             date: foodMeta.date,
             time: foodMeta.time,
+            ngo: foodMeta.ngo,
             delivery: selfDel,
           },
         },

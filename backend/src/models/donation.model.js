@@ -17,6 +17,7 @@ const foodDonationSchema = new mongoose.Schema({
     delivery: { type: Boolean }, // Indicates if it's a self-delivery or pickup
   },
   pointsEarned: { type: Number, default: 0 }, // Points earned for this donation
+  ngo: { type: mongoose.Schema.Types.ObjectId, ref: "ngos" },
 }, {
   versionKey: false,
   timestamps: true,
